@@ -1,0 +1,33 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "com.example.grpc_app_demo";//change package according to your project package or need
+option java_outer_classname = "GreeterProto";
+option objc_class_prefix = "GRT";
+
+package greeter;
+
+// The greeting service definition.
+service Greeter {
+  //unary call
+  rpc SayHello (HelloRequest) returns (HelloResponse) {}
+
+  //server_streaming
+  rpc LotsOfReplies(HelloRequest) returns (stream HelloResponse);
+
+  //client_streaming
+  rpc LotsOfRequests(stream HelloRequest) returns (HelloResponse);
+
+  //bi-directional_streaming
+  rpc BidirectionalHello(stream HelloRequest) returns (stream HelloResponse);
+}
+
+// The request message containing the user's name.
+message HelloRequest {
+  string name = 1;
+}
+
+// The response message containing the greetings
+message HelloResponse {
+  string message = 1;
+}
